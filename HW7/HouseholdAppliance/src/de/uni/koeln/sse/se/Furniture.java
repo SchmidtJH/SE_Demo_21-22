@@ -11,15 +11,23 @@ public class Furniture implements HouseholdItem{
 	int height;
 	
 	int weight;
+	Price price;
+	Information information;
 
 	
-	public Furniture(String name, String type, int lenght, int width, int height, int weight) {
+	public Furniture(String name, String type, int lenght, int width, int height, int weight, Price price, Information information) {
 		this.name = name;
 		this.type = type;
 		this.lenght = lenght;
 		this.width = width;
 		this.height = height;
 		this.weight = weight;
+		
+		this.price = price; 
+		this.information = information;
+		accept(price);
+		accept(information);
+	
 	}
 
 
@@ -64,6 +72,14 @@ public class Furniture implements HouseholdItem{
 
 	public void setName(String name) {
 		this.name = name;}
+	
+	public double getCost(){
+        return weight*0.25;
+    }
 
+	
+	public void accept(Visitor visitor) {
+		visitor.visitFurniture(this);
+	}
 	
 }

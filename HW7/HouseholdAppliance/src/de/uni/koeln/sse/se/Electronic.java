@@ -11,16 +11,21 @@ public class Electronic implements HouseholdItem{
 	int weight;
 	
 	Boolean fragile;
-	
+	Price price;
+	Information information;
 
 
-	public Electronic(String name, int lenght, int width, int height, int weight, Boolean fragile) {
+	public Electronic(String name, int lenght, int width, int height, int weight, Boolean fragile, Price price, Information information) {
 		this.name = name;
 		this.lenght = lenght;
 		this.width = width;
 		this.height = height;
 		this.weight = weight;
 		this.fragile = fragile;
+		this.price = price;
+		this.information = information;
+		accept(price);
+		accept(information);
 	}
 
 	
@@ -62,7 +67,15 @@ public class Electronic implements HouseholdItem{
 	public void setFragile(Boolean fragile) {
 		this.fragile = fragile;}
 	
+	public double getCost() {
+		return fragile? weight*0.5 : weight/3;
+	}
+	public void packingInformation() {
+		System.out.println("should be covered with Polyethylene foam and packed in a box with dimension" + + this.lenght + this.width + this.height);
+	}
 	
-	
+	public void accept(Visitor visitor) {
+		visitor.visitElectronic(this);
+	}
 
 }
